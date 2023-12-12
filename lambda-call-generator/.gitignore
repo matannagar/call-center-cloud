@@ -1,0 +1,17 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore package-lock.json file
+package-lock.json
+
+# Ignore log files
+*.log
+
+# Ignore build directory
+build/
+
+# Ignore test directory
+test/
+
+# Ignore.env file
+.env

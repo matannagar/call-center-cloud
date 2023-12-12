@@ -1,0 +1,18 @@
+{
+  "name": "call-center-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Matan-Ben Nagar",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "kafkajs": "^2.2.4",
+    "nodemon": "^3.0.2",
+    "redis": "^4.6.11"
+  }
+}
