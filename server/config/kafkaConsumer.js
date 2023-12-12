@@ -35,7 +35,7 @@ const run = async (eachMessageFunction) => {
 
     await consumer.run({
         eachMessage: async ({ message }) => {
-            await eachMessageFunction(message);
+            await eachMessageFunction(JSON.parse(message.value.toString()));
         },
     });
 };
