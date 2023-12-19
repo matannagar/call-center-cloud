@@ -7,7 +7,7 @@ let io; // Declare io as a global variable
 function initializeSocket(server) {
     io = socketIO(server, {
         cors: {
-            origin: [process.env.SOCKET_ORIGIN || 'http://localhost:3001']
+            origin: [process.env.SOCKET_ORIGIN || 'http://localhost:3000']
         }
     });
 
