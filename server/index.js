@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const http = require('http');
 const { initializeSocket } = require('./config/socket');
+const connectMongo = require('./config/mongo');
 
 const app = express();
 const server = http.createServer(app);
@@ -19,4 +20,5 @@ app.get('/', (req, res) => {
 server.listen(PORT, () => {
     console.log('Call center is running on port ', PORT);
     run(redisHandler).catch(console.error);
+    connectMongo();
 })
