@@ -58,4 +58,5 @@ const User = sequelize.define('User', {
     timestamps: true, // Adds createdAt and updatedAt columns
 });
 
+
 module.exports = User;

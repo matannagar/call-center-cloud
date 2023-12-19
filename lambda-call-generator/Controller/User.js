@@ -97,7 +97,7 @@ router.post('/generate-calls', async (req, res) => {
                 gender: user.gender,
                 city: user.city,
                 products: user.products,
-                regarding: getRandomElement(['joining', 'customer service', 'complaint', 'disconnecting']),
+                topic: getRandomElement(['joining', 'service', 'complaint', 'disconnecting']),
                 call_start_time: new Date(),
             };
             await produceMessage(JSON.stringify(call));
