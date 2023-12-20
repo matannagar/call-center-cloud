@@ -1,13 +1,10 @@
-// routes/users.js
-
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User'); // Import your User model
+const User = require('../models/User');
 const { sequelize } = require('../configs/sqlConnection');
 const { produceMessage, connectProducer, disconnectProducer } = require('../configs/kafkaConnection');
 const { getRandomElement, calculateAge } = require('../utils/utils');
 
-// Create a new user
 router.post('/users', async (req, res) => {
     try {
         const newUser = await User.create(req.body);
@@ -18,7 +15,6 @@ router.post('/users', async (req, res) => {
     }
 });
 
-// Get all users
 router.get('/users', async (req, res) => {
     try {
         const users = await User.findAll();
@@ -29,7 +25,6 @@ router.get('/users', async (req, res) => {
     }
 });
 
-// Get a specific user by ID
 router.get('/users/:userId', async (req, res) => {
     const userId = req.params.userId;
     try {
@@ -45,7 +40,6 @@ router.get('/users/:userId', async (req, res) => {
     }
 });
 
-// Update a specific user by ID
 router.put('/users/:userId', async (req, res) => {
     const userId = req.params.userId;
     try {
@@ -62,7 +56,6 @@ router.put('/users/:userId', async (req, res) => {
     }
 });
 
-// Delete a specific user by ID
 router.delete('/users/:userId', async (req, res) => {
     const userId = req.params.userId;
     try {
@@ -83,12 +76,13 @@ router.post('/generate-calls', async (req, res) => {
     try {
         const users = await User.findAll({
             order: sequelize.random(),
-            limit: 5
+            limit: 50
         });
 
         await connectProducer();
-
         await Promise.all(users.map(async (user) => {
+            const call_start_time = new Date();
+            call_start_time.setHours(Math.floor(Math.random() * 24));
             const call = {
                 user_id: user.id,
                 first_name: user.first_name,
@@ -98,7 +92,7 @@ router.post('/generate-calls', async (req, res) => {
                 city: user.city,
                 products: user.products,
                 topic: getRandomElement(['joining', 'service', 'complaint', 'disconnecting']),
-                call_start_time: new Date(),
+                call_start_time: call_start_time,
             };
             await produceMessage(JSON.stringify(call));
         }));

@@ -1,10 +1,7 @@
-// models/User.js
-
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../configs/sqlConnection'); // Import your Sequelize connection instance
+const { sequelize } = require('../configs/sqlConnection');
 
 const User = sequelize.define('User', {
-    // Define the model attributes (columns)
     id: {
         type: DataTypes.STRING,
         primaryKey: true,
@@ -53,9 +50,8 @@ const User = sequelize.define('User', {
         defaultValue: DataTypes.NOW,
     },
 }, {
-    // Define additional options for the model
-    tableName: 'users', // Set the table name if it's different from the model name
-    timestamps: true, // Adds createdAt and updatedAt columns
+    tableName: 'users',
+    timestamps: true,
 });
 
 

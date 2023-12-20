@@ -1,10 +1,9 @@
 require('dotenv').config();
 const { Kafka, Partitioners } = require('kafkajs');
 
-// Create a Kafka instance with the defined brokers
 const kafka = new Kafka({
     clientId: 'call-center',
-    brokers: [process.env.KAFKA_BROKER], // e.g., 'your-broker-url.cloudkarafka.com:9094'
+    brokers: [process.env.KAFKA_BROKER],
     ssl: true,
     sasl: {
         mechanism: 'scram-sha-512',
@@ -13,13 +12,11 @@ const kafka = new Kafka({
     },
 });
 
-// Create a producer instance
 const producer = kafka.producer({
     createPartitioner: Partitioners.LegacyPartitioner,
 });
 
-// Define the topic to which you want to send messages
-const topic = `${process.env.KAFKA_USER}-calls-topic`; // Replace with your desired Kafka topic
+const topic = `${process.env.KAFKA_USER}-calls-topic`;
 
 const connectProducer = async () => {
     await producer.connect(() => {
