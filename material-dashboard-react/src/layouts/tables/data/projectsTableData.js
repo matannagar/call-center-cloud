@@ -9,28 +9,11 @@ import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDProgress from "components/MDProgress";
 
-// Your data
-// const data = [
-//   {
-//     _id: "6581bc494178d3294cfc90f6",
-//     id: "f96ff1f7-c0ef-4fa2-a444-2f326a3df48f",
-//     firstName: "Vikki",
-//     lastName: "Elrick",
-//     age: 45,
-//     gender: "Female",
-//     city: "Huanggexi",
-//     products: '["cellular"]',
-//     topic: "complaint",
-//     __v: 0,
-//   },
-//   // ... (add other data objects)
-// ];
-
 export default function DataTable() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SOCKET_LINK}/api/calls`)
+    fetch(`${process.env.REACT_APP_SOCKET_LINK}api/calls`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);

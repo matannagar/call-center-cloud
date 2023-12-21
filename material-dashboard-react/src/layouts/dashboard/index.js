@@ -40,7 +40,6 @@ import { io } from "socket.io-client";
 
 function Dashboard() {
   const generateCalls = () => {
-    // Disable the MDButton
     setDisabled(true);
 
     // Wait for 10 seconds before enabling the MDButton
@@ -48,7 +47,7 @@ function Dashboard() {
       setDisabled(false);
     }, 10000);
 
-    fetch(process.env.LAMBDA_CALL_GENERATOR, {
+    fetch(process.env.REACT_APP_LAMBDA_CALL_GENERATOR, {
       method: "POST",
     });
   };
@@ -123,11 +122,13 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    const socket = io(process.env.SOCKET_LINK || "http://localhost:5000");
+    const socket = io(process.env.REACT_APP_SOCKET_LINK || "http://localhost:5000");
 
-    fetch(`${process.env.SOCKET_LINK}/api/calls-per-day`)
+    fetch(`${process.env.REACT_APP_SOCKET_LINK}api/calls-per-day`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
+
         data.forEach((item) => {
           const index = item._id - 1; // Assuming the _id values start from 1
           callsPerDayOfTheWeek[index] = item.count;
@@ -138,9 +139,10 @@ function Dashboard() {
         console.error("Error fetching data:", error);
       });
 
-    fetch(`${process.env.SOCKET_LINK}/api/calls-per-month`)
+    fetch(`${process.env.REACT_APP_SOCKET_LINK}api/calls-per-month`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         data.forEach((item) => {
           const index = item._id - 1; // Assuming the _id values start from 1
           callsPerMonth[index] = item.count;
