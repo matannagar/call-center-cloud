@@ -1,4 +1,4 @@
-const { getTimeUntilMidnight, generateCallEntity } = require('../utils/helper.js');
+const { getTimeUntilMidnight, generateCallEntity, generateKeyForRedis } = require('../utils/helper.js');
 const { getIO } = require('../config/socket');
 const { updatedData } = require('../data/data');
 const socket = getIO();
@@ -12,9 +12,7 @@ socket.on('connection', async (socket) => {
 
 const getUpdatedData = async () => {
     try {
-        const currentDate = new Date();
-        currentDate.setHours(0, 0, 0, 0);
-        const key = `calls:${currentDate}`;
+        const key = generateKeyForRedis(new Date());
 
         const totalCalls = await redisClient.HGET(key, 'total_calls') || "0";
         const complaints = await redisClient.HGET(key, 'total_complaint_calls') || "0";
@@ -43,9 +41,9 @@ const redisHandlerThreshold = 10;
 const redisHandler = async (callData) => {
     await generateCallEntity(callData);
     await updateData(callData);
-    const newData = await getUpdatedData();
     redisHandlerCounter++;
     if (redisHandlerCounter >= redisHandlerThreshold) {
+        const newData = await getUpdatedData();
         socket.emit('callData', newData);
         redisHandlerCounter = 0;
     }
@@ -57,9 +55,7 @@ const updateData = async (callData) => {
         return;
     };
     try {
-        const currentDate = new Date();
-        currentDate.setHours(0, 0, 0, 0);
-        const key = `calls:${currentDate}`;
+        const key = generateKeyForRedis(new Date());
 
         const callHour = new Date(callData.call_start_time).getHours();
         const callsPerHourArray = await redisClient.HGET(key, "calls_per_hour") || JSON.stringify(new Array(24).fill(0));

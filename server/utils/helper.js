@@ -33,7 +33,15 @@ async function generateCallEntity(callData) {
     }
 };
 
+const generateKeyForRedis = (currentDate) => {
+    currentDate.setHours(0, 0, 0, 0);
+    const key = `calls:${currentDate.toISOString()}`;
+
+    return key;
+}
+
 module.exports = {
     getTimeUntilMidnight,
-    generateCallEntity
+    generateCallEntity,
+    generateKeyForRedis
 };
