@@ -76,7 +76,7 @@ router.post('/generate-calls', async (req, res) => {
     try {
         const users = await User.findAll({
             order: sequelize.random(),
-            limit: 50
+            limit: 100
         });
 
         await connectProducer();
