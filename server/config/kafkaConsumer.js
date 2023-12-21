@@ -12,7 +12,6 @@ const kafka = new Kafka({
     },
 })
 
-
 const consumer = kafka.consumer({
     groupId: `${process.env.KAFKA_TOPIC}-call-center-group`
 })

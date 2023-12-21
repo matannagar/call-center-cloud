@@ -1,8 +1,7 @@
-// socket.js
 require('dotenv').config();
 const socketIO = require('socket.io');
 
-let io; // Declare io as a global variable
+let io;
 
 function initializeSocket(server) {
     io = socketIO(server, {
@@ -10,7 +9,6 @@ function initializeSocket(server) {
             origin: [process.env.SOCKET_ORIGIN || 'http://localhost:3000']
         }
     });
-
     return io;
 }
 

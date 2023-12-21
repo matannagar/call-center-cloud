@@ -1,8 +1,8 @@
-const redisClient = require('../config/redis');
 const { getTimeUntilMidnight, generateCallEntity } = require('../utils/helper.js');
 const { getIO } = require('../config/socket');
-const socket = getIO();
 const { updatedData } = require('../data/data');
+const socket = getIO();
+const redisClient = require('../config/redis');
 
 socket.on('connection', async (socket) => {
     console.log('A client is connected to socket');

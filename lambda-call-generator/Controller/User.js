@@ -81,8 +81,6 @@ router.post('/generate-calls', async (req, res) => {
 
         await connectProducer();
         await Promise.all(users.map(async (user) => {
-            const call_start_time = new Date();
-            call_start_time.setHours(Math.floor(Math.random() * 24));
             const call = {
                 user_id: user.id,
                 first_name: user.first_name,
@@ -92,7 +90,7 @@ router.post('/generate-calls', async (req, res) => {
                 city: user.city,
                 products: user.products,
                 topic: getRandomElement(['joining', 'service', 'complaint', 'disconnecting']),
-                call_start_time: call_start_time,
+                call_start_time: new Date(),
             };
             await produceMessage(JSON.stringify(call));
         }));

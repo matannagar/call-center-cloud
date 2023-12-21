@@ -3,7 +3,7 @@ const express = require('express');
 const http = require('http');
 const { initializeSocket } = require('./config/socket');
 const connectMongo = require('./config/mongo');
-const callsRoutes = require('./Controllers/Call');
+const callsRoutes = require('./Controllers/Call.js');
 const app = express();
 const cors = require('cors');
 app.use(cors());

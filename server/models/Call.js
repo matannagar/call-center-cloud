@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Define the User schema
 const userSchema = new mongoose.Schema({
     id: { type: String, required: true },
     firstName: { type: String, required: true },
@@ -13,7 +12,6 @@ const userSchema = new mongoose.Schema({
     callStartTime: { type: Date, default: Date.now, required: true },
 });
 
-// Create the User model
 const Call = mongoose.model('Call', userSchema);
 
 module.exports = Call;
