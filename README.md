@@ -6,7 +6,8 @@
 
 This repository contains code for a cloud-based call center application, focusing on user generation, dashboard management, and server-side operations.
 
- 
+## System Design
+![CallCenter Diagram](CallCenter.drawio)
 
 ## Directories
 
