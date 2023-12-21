@@ -1,6 +1,5 @@
 # Call Center Cloud
 
- 
 
 ## Overview
 
@@ -8,6 +7,12 @@ This repository contains code for a cloud-based call center application, focusin
 
 ## System Design
 ![CallCenter Diagram](CallCenter.jpg)
+
+## Key features
+- Use a Lambda function to access a SQL user database and randomly generate 100 fake calls
+- Intercept the calls, store them in mongoDB and create a 24 hours cache storage
+- Pull data from Redis and present it in a React front dashboard application
+- Present in the dashboard registered users.
 
 ## Directories
 
