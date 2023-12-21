@@ -34,8 +34,9 @@ async function generateCallEntity(callData) {
 };
 
 const generateKeyForRedis = (currentDate) => {
-    currentDate.setHours(0, 0, 0, 0);
-    const key = `calls:${currentDate.toISOString()}`;
+    const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayOfWeek = daysOfTheWeek[currentDate.getDay()];
+    const key = `calls:${dayOfWeek}`;
 
     return key;
 }
