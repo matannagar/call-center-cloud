@@ -14,6 +14,11 @@ This repository contains code for a cloud-based call center application, focusin
 - Pull data from Redis and present it in a React front dashboard application
 - Present in the dashboard registered users.
 
+## End points:
+- Generate calls: POST("https://jwqt86dxpd.execute-api.us-west-1.amazonaws.com/dev/api/generate-calls")
+- Backend server: https://call-center-server.onrender.com
+- Front: Coming soon.
+
 ## Directories
 
 - **lambda-call-generator**: Handles the generation of user data, with a limit set to 100 users. Useful for simulating call center activities.
@@ -37,9 +42,3 @@ To get started with this project:
 ## Contribution
 
 Feel free to contribute to this project by submitting pull requests or opening issues for any bugs or feature requests.
-
- 
-
-## License
-
-[Specify License Here]
